@@ -22,9 +22,7 @@ const t_itemid UNKNOWN_ITEM_ID = 512;
 /// The maximum number of item delays
 #define MAX_ITEMDELAYS	10
 ///Designed for search functions, species max number of matches to display.
-#ifndef MAX_SEARCH
-#define MAX_SEARCH	10
-#endif
+#define MAX_SEARCH	5
 
 #define MAX_ROULETTE_LEVEL 7 /** client-defined value **/
 #define MAX_ROULETTE_COLUMNS 9 /** client-defined value **/
@@ -308,7 +306,6 @@ enum e_random_item_group {
 	IG_A_GRADE_COIN_BAG,
 	IG_ADVANCED_WEAPONS_BOX,
 	IG_SPLENDID_BOX,
-	IG_SPLENDID_BOX2,
 	IG_CARDALBUM_ARMOR,
 	IG_CARDALBUM_HELM,
 	IG_CARDALBUM_ACC,
@@ -781,12 +778,12 @@ enum e_random_item_group {
 	IG_THIRD_JOB_STONE_BOTTOM_BOX,
 	IG_THIRD_JOB_STONE_BOTTOM_BOX2,
 	IG_SHADOW_EXCHANGE_BOX,
-	IG_GUNSLINGER_ENCHANT,
+	IG_DROOPING_GUNSLINGER_SCROLL,
 	IG_ENCHANTSTONE_RECIPE,
 	IG_PET_EGG_BOX,
 	IG_COSTUME_EXCHANGE_BOX,
-	IG_FAN_UPGRADE_KIT,
-	IG_SUIT_UPGRADE_KIT,
+	IG_FAN_MODIFICATION_KIT,
+	IG_UNIFORM_REPAIR_KIT,
 	IG_SCROLL_OF_FALLEN_ANGEL_WINGS,
 	IG_CLASS_SHADOW_BOX_WEAPON,
 	IG_CLASS_SHADOW_BOX_ARMOR,
@@ -799,11 +796,11 @@ enum e_random_item_group {
 	IG_BEARERSSHADOW_MIX,
 	IG_COMPOSESHADOW_MIX,
 	IG_RACESHADOW_MIX,
-	IG_CANDY_BAG_SCROLL_MELEE,
-	IG_CANDY_BAG_SCROLL_RANGE,
-	IG_CANDY_BAG_SCROLL_MAGIC,
-	IG_BOOSTER_AMPLIFIER,
-	IG_MAGICAL_CAT_HAND,
+	IG_CANDY_POUCH_BLESSING_SCROLL_MELEE,
+	IG_CANDY_POUCH_BLESSING_SCROLL_RANGE,
+	IG_CANDY_POUCH_BLESSING_SCROLL_MAGIC,
+	IG_MAGICAL_BOOSTER_AMPLIFIER,
+	IG_MAGIC_CAT_HAND_SCROLL,
 	IG_INFINITYSHADOW_MIX,
 	IG_SILVER_STATUE,
 	IG_PHYSICALMAGICAL_MIX,
@@ -958,42 +955,11 @@ enum e_random_item_group {
 	IG_GOLDEN_LORD_LAUNCHER_CUBE,
 	IG_THE_BLACK_CUBE,
 	IG_DEMON_SLAYER_SHOT_CUBE,
-	IG_RUNE_CRAFT_MATERIALS,
-	IG_ELEMENTAL_CONVERTER,
-	IG_POISONS,
-	IG_BLACKSMITH,
-	IG_POTION_CRAFT_MATERIALS,
-	IG_KUNAI_BOX,
-	IG_BULLET_CASE,
-	IG_SOUL_LINKER,
-	IG_ELEMENTAL_STONES,
-	IG_SHADOW_CUBE_ARMOR,
-	IG_SHADOW_CUBE_SHIELD,
-	IG_SHADOW_CUBE_SHOES,
-	IG_SHADOW_CUBE_WEAPON,
 	IG_AUTOMATIC_MODULE_MIX,
 	IG_EPIC_MODULE_MIX,
 	IG_AUTO_M_I_BOX_A,
 	IG_AUTO_M_I_BOX_B,
 	IG_ILLUSION_MODULE_MIX,
-	IG_ENCHANT_STONE_BOX22,
-	IG_ENCHANT_STONE_BOX23,
-	IG_ENCHANT_STONE_BOX24,
-	IG_ENCHANT_STONE_BOX25,
-	IG_ENCHANT_STONE_BOX27,
-	IG_ANCIENT_HERO_BOX_1,
-	IG_3LV_9REFINE_WEAPON_7GU,
-	IG_3LV_10REFINE_WEAPON_8GU,
-	IG_3LV_11REFINE_WEAPON_9GU,
-	IG_3LV_12REFINE_WEAPON_10G,
-	IG_4LV_9REFINE_WEAPON_8GU,
-	IG_4LV_10REFINE_WEAPON_9GU,
-	IG_4LV_11REFINE_WEAPON_10G,
-	IG_BS_ITEM_M_S_52,
-	IG_Bs_Item_M_S_53,
-	IG_Bs_Item_M_S_54,
-	IG_Bs_Item_M_S_55,
-	IG_Bs_Item_M_S_56,
 
 	IG_MAX,
 };
@@ -1385,9 +1351,9 @@ public:
 
 extern LaphineUpgradeDatabase laphine_upgrade_db;
 
-uint16 itemdb_searchname_array(std::map<t_itemid, std::shared_ptr<item_data>> &data, uint16 size, const char *str);
+int itemdb_searchname_array(struct item_data** data, int size, const char *str);
 struct item_data* itemdb_search(t_itemid nameid);
-std::shared_ptr<item_data> itemdb_exists(t_itemid nameid);
+struct item_data* itemdb_exists(t_itemid nameid);
 #define itemdb_name(n) itemdb_search(n)->name.c_str()
 #define itemdb_ename(n) itemdb_search(n)->ename.c_str()
 #define itemdb_type(n) itemdb_search(n)->type
